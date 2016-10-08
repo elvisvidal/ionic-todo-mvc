@@ -1,0 +1,20 @@
+<ion-view view-title="All">
+  <ion-content class="padding">
+
+    <!-- input -->
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="What needs to be done?" ng-model="newTask.title">
+      </label>
+      <button class="button button-small" ng-click="addTask()">
+        Submit
+      </button>
+    </div>
+
+    <!-- list -->
+    <ion-list>
+      <ion-checkbox>Red</ion-checkbox>
+    </ion-list>
+
+  </ion-content>
+</ion-view>
