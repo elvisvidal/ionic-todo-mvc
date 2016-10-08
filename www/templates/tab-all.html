@@ -13,7 +13,7 @@
 
     <!-- list -->
     <ion-list>
-      <ion-checkbox>Red</ion-checkbox>
+      <ion-checkbox ng-repeat="todo in todos">{{ todo.title }}</ion-checkbox>
     </ion-list>
 
   </ion-content>
