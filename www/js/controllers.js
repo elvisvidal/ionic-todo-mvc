@@ -5,8 +5,9 @@ angular.module('todomvc.controllers', [])
 
   var todos = $scope.todos = localStorage.todos;
   var status = $scope.status = 'all';
-  $scope.statusFilter = {};
+  var statusFilter = $scope.statusFilter = {};
   $scope.newTask = {title: ''};
+  localStorage.get();
 
   // -------------- filter
   $scope.checkStatus = function (status) {
