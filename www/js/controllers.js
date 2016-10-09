@@ -10,6 +10,7 @@ angular.module('starter.controllers', [])
     localStorage.get();
   });
 
+  // -------------- addTask
   $scope.addTask = function() {
     var newTask = {
       title: $scope.newTask.title.trim(),
@@ -28,6 +29,16 @@ angular.module('starter.controllers', [])
                 .finally(function () {
                   $scope.saving = false;
                 });
+  };
+
+  // -------------- toggleCompleted
+  $scope.toggleCompleted = function(task) {
+    localStorage.put(task, todos.indexOf(task))
+                .then(
+                  function success(){},
+                  function error() {
+                    task.completed = !task.completed
+                  });
   };
 })
 

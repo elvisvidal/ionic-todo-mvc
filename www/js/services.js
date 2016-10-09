@@ -23,16 +23,27 @@ angular.module('starter.services', [])
       return deferred.promise;
     },
 
-    insert: function (todo) {
+    insert: function (task) {
       var deferred = $q.defer();
 
-      store.todos.push(todo);
+      store.todos.push(task);
 
       store._saveToLocalStorage(store.todos);
       deferred.resolve(store.todos);
 
       return deferred.promise;
     },
+
+    put: function (task, index) {
+      var deferred = $q.defer();
+
+      store.todos[index] = task;
+
+      store._saveToLocalStorage(store.todos);
+      deferred.resolve(store.todos);
+
+      return deferred.promise;
+    }
   }
 
   return store;
