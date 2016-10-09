@@ -1,14 +1,31 @@
-angular.module('starter.controllers', [])
+angular.module('todomvc.controllers', [])
 
 // =================== ALL
 .controller('AllCtrl', function($scope, localStorage) {
-  var todos = $scope.todos = localStorage.todos;
 
+  var todos = $scope.todos = localStorage.todos;
+  var status = $scope.status = 'all';
+  $scope.statusFilter = {};
   $scope.newTask = {title: ''};
 
-  $scope.$on('$ionicView.beforeEnter', function() {
-    localStorage.get();
-  });
+  // -------------- filter
+  $scope.checkStatus = function (status) {
+    return $scope.status == status;
+  };
+  $scope.changeStatus = function (status) {
+    $scope.status = status;
+    switch(status) {
+      case 'all':
+        $scope.statusFilter = {};
+        break;
+      case 'active':
+        $scope.statusFilter = {completed: false};
+        break;
+      case 'completed':
+        $scope.statusFilter = {completed: true};
+        break;
+    }
+  };
 
   // -------------- addTask
   $scope.addTask = function() {
@@ -45,14 +62,5 @@ angular.module('starter.controllers', [])
   $scope.removeTask = function(task) {
     localStorage.delete(task);
   };
-})
 
-// =================== ACTIVE
-.controller('ActiveCtrl', function($scope) {})
-
-// =================== COMPLETED
-.controller('CompletedCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
 });

@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('todomvc.services', [])
 
 .factory('localStorage', function($q) {  
   var STORAGE_ID = 'todos-angularjs';

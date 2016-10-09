@@ -34,19 +34,63 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
   </head>
-  <body ng-app="starter">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
-    <ion-nav-view></ion-nav-view>
+  <body ng-app="todomvc" ng-controller="AllCtrl">
+    <ion-pane>
+      <!-- HEADER -->
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">All</h1>
+      </ion-header-bar>
+      <!-- FIM - HEADER -->
+      
+      <!-- CONTENT -->
+      <ion-content class="padding has-tabs">
+        <!-- input -->
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="What needs to be done?" ng-model="newTask.title">
+          </label>
+          <button class="button button-small" ng-click="addTask()">
+            Submit
+          </button>
+        </div>
+
+        <!-- list -->
+        <ion-list>
+          <ion-item ng-repeat="todo in todos | filter:statusFilter">
+            <!-- checkbox -->
+            <label class="item-checkbox ng-not-empty ng-valid">
+              <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                <input type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+                <i class="checkbox-icon"></i>
+              </div>
+              {{ todo.title }}
+            </label>
+            
+            <!-- delete button -->
+            <ion-option-button class="button-assertive" ng-click="removeTask(todo)">
+              <i class="ion ion-trash-b"></i>&nbsp;Remove
+            </ion-option-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+      <!-- FIM - CONTENT -->
+
+      <!-- TABS -->
+      <div class="tabs tabs-icon-top">
+        <a class="tab-item" ng-class="{'active': checkStatus('all')}" ng-click="changeStatus('all')">
+          <i class="icon {{ checkStatus('all') ? 'ion-ios-list' : 'ion-ios-list-outline' }}"></i>
+          All
+        </a>
+        <a class="tab-item" ng-class="{'active': checkStatus('active')}" ng-click="changeStatus('active')">
+          <i class="icon {{ checkStatus('active') ? 'ion-ios-chatboxes' : 'ion-ios-chatboxes-outline' }}"></i>
+          Active
+        </a>
+        <a class="tab-item" ng-class="{'active': checkStatus('completed')}" ng-click="changeStatus('completed')">
+          <i class="icon {{ checkStatus('completed') ? 'ion-ios-checkmark' : 'ion-ios-checkmark-outline' }}"></i>
+          Completed
+        </a>
+      </div>
+      <!-- FIM - TABS -->
+    </ion-pane>
   </body>
 </html>
