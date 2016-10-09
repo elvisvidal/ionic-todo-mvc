@@ -6,6 +6,10 @@ angular.module('starter.controllers', [])
 
   $scope.newTask = {title: ''};
 
+  $scope.$on('$ionicView.beforeEnter', function() {
+    localStorage.get();
+  });
+
   $scope.addTask = function() {
     var newTask = {
       title: $scope.newTask.title.trim(),

@@ -6,8 +6,21 @@ angular.module('starter.services', [])
   var store = {
     todos: [],
 
+    _getFromLocalStorage: function () {
+      return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+    },
+
     _saveToLocalStorage: function (todos) {
       localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+    },
+
+    get: function() {
+      var deferred = $q.defer();
+
+      angular.copy(store._getFromLocalStorage(), store.todos);
+      deferred.resolve(store.todos);
+
+      return deferred.promise;
     },
 
     insert: function (todo) {
