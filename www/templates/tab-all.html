@@ -13,11 +13,21 @@
 
     <!-- list -->
     <ion-list>
-      <ion-checkbox ng-repeat="todo in todos" 
-                    ng-model="todo.completed"
-                    ng-change="toggleCompleted(todo)">
-        {{ todo.title }}
-      </ion-checkbox>
+      <ion-item ng-repeat="todo in todos">
+        <!-- checkbox -->
+        <label class="item-checkbox ng-not-empty ng-valid">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+            <input type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+            <i class="checkbox-icon"></i>
+          </div>
+          {{ todo.title }}
+        </label>
+        
+        <!-- delete button -->
+        <ion-option-button class="button-assertive" ng-click="removeTask(todo)">
+          <i class="ion ion-trash-b"></i>&nbsp;Remove
+        </ion-option-button>
+      </ion-item>
     </ion-list>
 
   </ion-content>

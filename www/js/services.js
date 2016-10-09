@@ -14,6 +14,17 @@ angular.module('starter.services', [])
       localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
     },
 
+    delete: function (task) {
+      var deferred = $q.defer();
+
+      store.todos.splice(store.todos.indexOf(task), 1);
+
+      store._saveToLocalStorage(store.todos);
+      deferred.resolve(store.todos);
+
+      return deferred.promise;
+    },
+
     get: function() {
       var deferred = $q.defer();
 

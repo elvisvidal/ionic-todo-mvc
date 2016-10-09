@@ -40,6 +40,11 @@ angular.module('starter.controllers', [])
                     task.completed = !task.completed
                   });
   };
+
+  // -------------- removeTask
+  $scope.removeTask = function(task) {
+    localStorage.delete(task);
+  };
 })
 
 // =================== ACTIVE
